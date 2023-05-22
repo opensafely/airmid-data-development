@@ -39,3 +39,12 @@ actions:
     outputs:
       moderately_sensitive:
         rows: output/consultation_date/rows.csv
+
+  consultation_id:
+    run: sqlrunner:latest
+      --output output/consultation_id/rows.csv
+      --dummy-data-file analysis/consultation_id/dummy_rows.csv
+      analysis/consultation_id/query.sql
+    outputs:
+      moderately_sensitive:
+        rows: output/consultation_id/rows.csv

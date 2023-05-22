@@ -12,3 +12,12 @@ actions:
     outputs:
       highly_sensitive:
         rows: output/patient_id/rows.csv
+
+  code_system_id:
+    run: sqlrunner:latest
+      --output output/code_system_id/rows.csv
+      --dummy-data-file analysis/code_system_id/dummy_rows.csv
+      analysis/code_system_id/query.sql
+    outputs:
+      highly_sensitive:
+        rows: output/code_system_id/rows.csv

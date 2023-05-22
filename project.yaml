@@ -10,7 +10,7 @@ actions:
       --dummy-data-file analysis/patient_id/dummy_rows.csv
       analysis/patient_id/query.sql
     outputs:
-      highly_sensitive:
+      moderately_sensitive:
         rows: output/patient_id/rows.csv
 
   code_system_id:
@@ -19,7 +19,7 @@ actions:
       --dummy-data-file analysis/code_system_id/dummy_rows.csv
       analysis/code_system_id/query.sql
     outputs:
-      highly_sensitive:
+      moderately_sensitive:
         rows: output/code_system_id/rows.csv
 
   coded_event_id:
@@ -28,5 +28,5 @@ actions:
       --dummy-data-file analysis/coded_event_id/dummy_rows.csv
       analysis/coded_event_id/query.sql
     outputs:
-      highly_sensitive:
+      moderately_sensitive:
         rows: output/coded_event_id/rows.csv

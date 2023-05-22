@@ -30,3 +30,12 @@ actions:
     outputs:
       moderately_sensitive:
         rows: output/coded_event_id/rows.csv
+
+  consultation_date:
+    run: sqlrunner:latest
+      --output output/consultation_date/rows.csv
+      --dummy-data-file analysis/consultation_date/dummy_rows.csv
+      analysis/consultation_date/query.sql
+    outputs:
+      moderately_sensitive:
+        rows: output/consultation_date/rows.csv

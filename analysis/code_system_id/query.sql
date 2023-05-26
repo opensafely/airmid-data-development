@@ -1,5 +1,5 @@
--- How many patients and how many rows are associated with each concept in each code
--- system?
+-- Do values of code system ID map to values of concept ID? How may patients and how
+-- many rows are associated with each mapping?
 SELECT
     CodeSystemId AS code_system_id,
     ConceptId AS concept_id,

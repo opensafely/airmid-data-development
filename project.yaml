@@ -49,14 +49,14 @@ actions:
       moderately_sensitive:
         rows: output/consultation_id/rows.csv
 
-  consultation_id_num_rows:
+  row_response:
     run: sqlrunner:latest
-      --output output/consultation_id_num_rows/rows.csv
-      --dummy-data-file analysis/consultation_id_num_rows/dummy_rows.csv
-      analysis/consultation_id_num_rows/query.sql
+      --output output/row_response/rows.csv
+      --dummy-data-file analysis/row_response/dummy_rows.csv
+      analysis/row_response/query.sql
     outputs:
       moderately_sensitive:
-        rows: output/consultation_id_num_rows/rows.csv
+        rows: output/row_response/rows.csv
 
   is_consultation_id_fk:
     run: sqlrunner:latest

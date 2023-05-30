@@ -4,14 +4,14 @@ expectations:
   population_size: 1000
 
 actions:
-  patient_id:
+  non_tpp_participants:
     run: sqlrunner:latest
-      --output output/patient_id/rows.csv
-      --dummy-data-file analysis/patient_id/dummy_rows.csv
-      analysis/patient_id/query.sql
+      --output output/non_tpp_participants/rows.csv
+      --dummy-data-file analysis/non_tpp_participants/dummy_rows.csv
+      analysis/non_tpp_participants/query.sql
     outputs:
       moderately_sensitive:
-        rows: output/patient_id/rows.csv
+        rows: output/non_tpp_participants/rows.csv
 
   code_system_id:
     run: sqlrunner:latest

@@ -4,14 +4,14 @@ expectations:
   population_size: 1000
 
 actions:
-  patient_id:
+  non_tpp_participants:
     run: sqlrunner:latest
-      --output output/patient_id/rows.csv
-      --dummy-data-file analysis/patient_id/dummy_rows.csv
-      analysis/patient_id/query.sql
+      --output output/non_tpp_participants/rows.csv
+      --dummy-data-file analysis/non_tpp_participants/dummy_rows.csv
+      analysis/non_tpp_participants/query.sql
     outputs:
       moderately_sensitive:
-        rows: output/patient_id/rows.csv
+        rows: output/non_tpp_participants/rows.csv
 
   code_system_id:
     run: sqlrunner:latest
@@ -40,29 +40,29 @@ actions:
       moderately_sensitive:
         rows: output/consultation_date/rows.csv
 
-  consultation_id:
+  patients_by_surveys:
     run: sqlrunner:latest
-      --output output/consultation_id/rows.csv
-      --dummy-data-file analysis/consultation_id/dummy_rows.csv
-      analysis/consultation_id/query.sql
+      --output output/patients_by_surveys/rows.csv
+      --dummy-data-file analysis/patients_by_surveys/dummy_rows.csv
+      analysis/patients_by_surveys/query.sql
     outputs:
       moderately_sensitive:
-        rows: output/consultation_id/rows.csv
+        rows: output/patients_by_surveys/rows.csv
 
-  consultation_id_num_rows:
+  row_response:
     run: sqlrunner:latest
-      --output output/consultation_id_num_rows/rows.csv
-      --dummy-data-file analysis/consultation_id_num_rows/dummy_rows.csv
-      analysis/consultation_id_num_rows/query.sql
+      --output output/row_response/rows.csv
+      --dummy-data-file analysis/row_response/dummy_rows.csv
+      analysis/row_response/query.sql
     outputs:
       moderately_sensitive:
-        rows: output/consultation_id_num_rows/rows.csv
+        rows: output/row_response/rows.csv
 
-  consultation_id_num_consultations:
+  is_consultation_id_fk:
     run: sqlrunner:latest
-      --output output/consultation_id_num_consultations/rows.csv
-      --dummy-data-file analysis/consultation_id_num_consultations/dummy_rows.csv
-      analysis/consultation_id_num_consultations/query.sql
+      --output output/is_consultation_id_fk/rows.csv
+      --dummy-data-file analysis/is_consultation_id_fk/dummy_rows.csv
+      analysis/is_consultation_id_fk/query.sql
     outputs:
       moderately_sensitive:
-        rows: output/consultation_id_num_consultations/rows.csv
+        rows: output/is_consultation_id_fk/rows.csv

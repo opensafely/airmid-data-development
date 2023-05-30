@@ -1,8 +1,6 @@
--- How many patients and how many rows are associated with each coded event?
-SELECT
+-- Are values of CodedEvent_ID valid CTV3 codes?
+SELECT DISTINCT
     CodedEvent_ID AS coded_event_id,
-    COUNT(DISTINCT Patient_ID) AS num_patients,
-    COUNT(Patient_ID) AS num_rows
-FROM OpenPROMPT
-GROUP BY CodedEvent_ID
+    Description AS description
+FROM OpenPROMPT LEFT JOIN CTV3Dictionary ON CodedEvent_ID = CTV3Code
 ORDER BY CodedEvent_ID

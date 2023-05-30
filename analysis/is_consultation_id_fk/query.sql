@@ -1,7 +1,7 @@
 -- Create a frequency table of the number of surveys (consultations) that are
 -- administered on the given number of dates. If the result is that all surveys
 -- (consultations) are administered on one date, then we can infer that Consultation_ID
--- is an FK.
+-- is an FK to a survey entity.
 SELECT
     num_dates,
     COUNT(num_dates) AS num_consultations

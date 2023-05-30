@@ -40,14 +40,14 @@ actions:
       moderately_sensitive:
         rows: output/consultation_date/rows.csv
 
-  consultation_id:
+  patients_by_surveys:
     run: sqlrunner:latest
-      --output output/consultation_id/rows.csv
-      --dummy-data-file analysis/consultation_id/dummy_rows.csv
-      analysis/consultation_id/query.sql
+      --output output/patients_by_surveys/rows.csv
+      --dummy-data-file analysis/patients_by_surveys/dummy_rows.csv
+      analysis/patients_by_surveys/query.sql
     outputs:
       moderately_sensitive:
-        rows: output/consultation_id/rows.csv
+        rows: output/patients_by_surveys/rows.csv
 
   row_response:
     run: sqlrunner:latest

@@ -66,3 +66,12 @@ actions:
     outputs:
       moderately_sensitive:
         rows: output/is_consultation_id_fk/rows.csv
+
+  model_data_structure:
+    run: sqlrunner:latest
+      --output output/model_data_structure/rows.csv
+      --dummy-data-file analysis/model_data_structure/dummy_rows.csv
+      analysis/model_data_structure/query.sql
+    outputs:
+      highly_sensitive:
+        rows: output/model_data_structure/rows.csv

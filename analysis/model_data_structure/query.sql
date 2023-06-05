@@ -72,3 +72,4 @@ FROM consult
 LEFT JOIN dm01 ON consult.Consultation_ID = dm01.Consultation_ID
 LEFT JOIN dm02 ON consult.Consultation_ID = dm02.Consultation_ID
 LEFT JOIN lc03 ON consult.Consultation_ID = lc03.Consultation_ID
+ORDER BY consult.Patient_ID, consult.Consultation_Number

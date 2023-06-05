@@ -75,3 +75,12 @@ actions:
     outputs:
       highly_sensitive:
         rows: output/model_data_structure/rows.csv
+
+  model_data_structure_from_dataset_definition:
+    run: ehrql:v0
+      generate-dataset
+      --output output/model_data_structure/dataset.csv
+      analysis/model_data_structure/dataset_definition.py
+    outputs:
+      highly_sensitive:
+        rows: output/model_data_structure/dataset.csv

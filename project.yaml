@@ -67,7 +67,7 @@ actions:
       moderately_sensitive:
         rows: output/is_consultation_id_fk/rows.csv
 
-  model_data_structure:
+  model_data_structure_from_query:
     run: sqlrunner:latest
       --output output/model_data_structure/rows.csv
       --dummy-data-file analysis/model_data_structure/dummy_rows.csv
@@ -75,3 +75,12 @@ actions:
     outputs:
       highly_sensitive:
         rows: output/model_data_structure/rows.csv
+
+  model_data_structure_from_dataset_definition:
+    run: ehrql:v0
+      generate-dataset
+      --output output/model_data_structure/dataset.csv
+      analysis/model_data_structure/dataset_definition.py
+    outputs:
+      highly_sensitive:
+        rows: output/model_data_structure/dataset.csv

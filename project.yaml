@@ -86,3 +86,12 @@ actions:
     outputs:
       highly_sensitive:
         rows: output/model_data_structure/dataset.csv
+
+  num_consultations_by_offset:
+    run: sqlrunner:latest
+      --output output/num_consultations_by_offset/rows.csv
+      --dummy-data-file analysis/num_consultations_by_offset/dummy_rows.csv
+      analysis/num_consultations_by_offset/query.sql
+    outputs:
+      moderately_sensitive:
+        rows: output/num_consultations_by_offset/rows.csv

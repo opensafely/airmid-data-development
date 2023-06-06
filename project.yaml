@@ -81,6 +81,8 @@ actions:
       generate-dataset
       --output output/model_data_structure/dataset.csv
       analysis/model_data_structure/dataset_definition.py
+      --
+      --day=0
     outputs:
       highly_sensitive:
         rows: output/model_data_structure/dataset.csv

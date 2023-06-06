@@ -1,6 +1,17 @@
+import argparse
+
 from ehrql import Dataset
 from ehrql.tables.beta.tpp import open_prompt
 from questions import questions
+
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    "--day",
+    type=int,
+    help="The day a survey was completed, relative to the day the first survey was completed",
+)
+args = parser.parse_args()
+print(f"{args.day=}")
 
 # The number of days from the date of the earliest response to the date of the current
 # response. We expect this to be >= 0.
@@ -19,7 +30,7 @@ for question in questions:
     # fetch the row containing the last response to the current question from the survey
     # administered on day 0
     response_row = (
-        open_prompt.where(consult_offset == 0)
+        open_prompt.where(consult_offset == args.day)
         .where(open_prompt.ctv3_code.is_in(question.ctv3_codes))
         .sort_by(open_prompt.consultation_id)  # arbitrary but deterministic
         .last_for_patient()

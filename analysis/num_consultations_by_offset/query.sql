@@ -28,6 +28,11 @@ WITH consult AS (
                 Patient_ID,
                 ConsultationDate
             FROM OpenPROMPT
+            -- Only include responses to a compulsory question on the Eq-5D
+            -- questionnaire. Unlike the baseline questionnaire, this questionnaire was
+            -- administered in each survey. Consultations that are associated with these
+            -- responses are valid OpenPROMPT consultations.
+            WHERE CodedEvent_ID = 'XaYwo'
         ) AS t
     ) AS t
 )

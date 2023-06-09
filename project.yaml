@@ -95,3 +95,12 @@ actions:
     outputs:
       moderately_sensitive:
         rows: output/num_consultations_by_offset/rows.csv
+
+  numeric_value:
+    run: sqlrunner:latest
+      --output output/numeric_value/rows.csv
+      --dummy-data-file analysis/numeric_value/dummy_rows.csv
+      analysis/numeric_value/query.sql
+    outputs:
+      moderately_sensitive:
+        rows: output/numeric_value/rows.csv

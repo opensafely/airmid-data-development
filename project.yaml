@@ -104,3 +104,12 @@ actions:
     outputs:
       moderately_sensitive:
         rows: output/numeric_value/rows.csv
+
+  duplicate_responses:
+    run: sqlrunner:latest
+      --output output/duplicate_responses/rows.csv
+      --dummy-data-file analysis/duplicate_responses/dummy_rows.csv
+      analysis/duplicate_responses/query.sql
+    outputs:
+      moderately_sensitive:
+        rows: output/duplicate_responses/rows.csv

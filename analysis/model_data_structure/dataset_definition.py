@@ -23,6 +23,15 @@ dataset = Dataset()
 
 dataset.define_population(open_prompt.exists_for_patient())
 
+dataset.first_consult_date = open_prompt.consultation_date.minimum_for_patient()
+
+dataset.consult_date = (
+    open_prompt.where(consult_offset == args.day)
+    .sort_by(open_prompt.consultation_id)
+    .last_for_patient()
+    .consultation_date
+)
+
 # A row represents a response to a question in a questionnaire. There are six
 # questionnaires, which are administered in four surveys on day 0, 30, 60, and 90. For
 # more information, see DATA.md.

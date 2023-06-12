@@ -41,4 +41,11 @@ questions = [
         ],
         "ctv3_code",
     ),
+    Question(  # compulsory
+        "eq03",
+        [
+            "XaYwo",
+        ],
+        "numeric_value",
+    ),
 ]

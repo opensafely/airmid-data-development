@@ -22,7 +22,7 @@ print(f"{args.window=}")
 
 # The number of days from the date of the earliest response to the date of the current
 # response. We expect this to be >= 0.
-day_0 = open_prompt.where(
+index_date = open_prompt.where(
     # Only include responses to a compulsory question on the Eq-5D
     # questionnaire. Unlike the baseline questionnaire, this questionnaire was
     # administered in each survey. Surveys that are associated with these
@@ -30,13 +30,13 @@ day_0 = open_prompt.where(
     open_prompt.ctv3_code
     == "XaYwo"
 ).consultation_date.minimum_for_patient()
-consult_offset = (open_prompt.consultation_date - day_0).days
+consult_offset = (open_prompt.consultation_date - index_date).days
 
 dataset = Dataset()
 
 dataset.define_population(open_prompt.exists_for_patient())
 
-dataset.first_consult_date = day_0
+dataset.index_date = index_date
 
 dataset.consult_date = (
     open_prompt.where(consult_offset == args.day)

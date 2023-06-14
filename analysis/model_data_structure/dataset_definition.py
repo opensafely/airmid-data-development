@@ -20,9 +20,8 @@ args = parser.parse_args()
 print(f"{args.day=}")
 print(f"{args.window=}")
 
-# The number of days from the date of the earliest response to the date of the current
-# response. We expect this to be >= 0.
-day_0 = open_prompt.where(
+# The date of the earliest response
+index_date = open_prompt.where(
     # Only include responses to a compulsory question on the Eq-5D
     # questionnaire. Unlike the baseline questionnaire, this questionnaire was
     # administered in each survey. Surveys that are associated with these
@@ -30,16 +29,18 @@ day_0 = open_prompt.where(
     open_prompt.ctv3_code
     == "XaYwo"
 ).consultation_date.minimum_for_patient()
-consult_offset = (open_prompt.consultation_date - day_0).days
+# The number of days from the date of the earliest response to the date of each
+# response. We expect this to be >= 0.
+offset_from_index_date = (open_prompt.consultation_date - index_date).days
 
 dataset = Dataset()
 
 dataset.define_population(open_prompt.exists_for_patient())
 
-dataset.first_consult_date = open_prompt.consultation_date.minimum_for_patient()
+dataset.index_date = index_date
 
 dataset.consult_date = (
-    open_prompt.where(consult_offset == args.day)
+    open_prompt.where(offset_from_index_date == args.day)
     .sort_by(open_prompt.consultation_id)
     .last_for_patient()
     .consultation_date
@@ -52,8 +53,8 @@ for question in questions:
     # fetch the row containing the last response to the current question from the survey
     # administered on day 0
     response_row = (
-        open_prompt.where(consult_offset >= args.day - args.window)
-        .where(consult_offset <= args.day + args.window)
+        open_prompt.where(offset_from_index_date >= args.day - args.window)
+        .where(offset_from_index_date <= args.day + args.window)
         .where(open_prompt.ctv3_code.is_in(question.ctv3_codes))
         # If the response is a CTV3 code, then the numeric value should be zero and
         # sorting by the numeric value should have no effect. However, if the response

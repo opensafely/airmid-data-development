@@ -72,7 +72,7 @@ for question in questions:
     )
     # the response itself may be a CTV3 code or a numeric value
     response_value = getattr(response_row, question.value_property)
-    setattr(dataset, question.id, response_value)
+    setattr(dataset, f"{question.id}_value", response_value)
 
     # the date of this response may be different from the dates of the other responses
     setattr(dataset, f"{question.id}_consult_date", response_row.consultation_date)

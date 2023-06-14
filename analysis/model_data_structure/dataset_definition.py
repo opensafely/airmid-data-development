@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 from ehrql import Dataset
 from ehrql.tables.beta.tpp import open_prompt
@@ -17,8 +18,10 @@ parser.add_argument(
     help="The number of days +/- the day a survey was completed",
 )
 args = parser.parse_args()
-print(f"{args.day=}")
-print(f"{args.window=}")
+# Printing to stderr means we can pipe generate-dataset/dump-dataset-sql safely
+# (i.e. we don't end up with unwanted strings in our CSV/SQL).
+print(f"{args.day=}", file=sys.stderr)
+print(f"{args.window=}", file=sys.stderr)
 
 # The date of the earliest response
 index_date = open_prompt.where(

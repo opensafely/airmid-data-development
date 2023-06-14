@@ -20,8 +20,7 @@ args = parser.parse_args()
 print(f"{args.day=}")
 print(f"{args.window=}")
 
-# The number of days from the date of the earliest response to the date of the current
-# response. We expect this to be >= 0.
+# The date of the earliest response
 index_date = open_prompt.where(
     # Only include responses to a compulsory question on the Eq-5D
     # questionnaire. Unlike the baseline questionnaire, this questionnaire was
@@ -30,6 +29,8 @@ index_date = open_prompt.where(
     open_prompt.ctv3_code
     == "XaYwo"
 ).consultation_date.minimum_for_patient()
+# The number of days from the date of the earliest response to the date of each
+# response. We expect this to be >= 0.
 consult_offset = (open_prompt.consultation_date - index_date).days
 
 dataset = Dataset()

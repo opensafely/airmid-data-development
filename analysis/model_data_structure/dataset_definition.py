@@ -42,13 +42,6 @@ dataset.define_population(open_prompt.exists_for_patient())
 
 dataset.index_date = index_date
 
-dataset.consult_date = (
-    open_prompt.where(offset_from_index_date == args.day)
-    .sort_by(open_prompt.consultation_id)
-    .last_for_patient()
-    .consultation_date
-)
-
 # A row represents a response to a question in a questionnaire. There are six
 # questionnaires, which are administered in four surveys on day 0, 30, 60, and 90. For
 # more information, see DATA.md.
@@ -74,12 +67,12 @@ for question in questions:
         # 2. the first response failed form-validation; the second response passed
         #
         # We acknowledge that the true response for 3. is undetermined.
-        .sort_by(
-            open_prompt.numeric_value,
-            open_prompt.consultation_id,  # arbitrary but deterministic
-        )
+        .sort_by(open_prompt.numeric_value)
         .last_for_patient()
     )
     # the response itself may be a CTV3 code or a numeric value
     response_value = getattr(response_row, question.value_property)
-    setattr(dataset, question.id, response_value)
+    setattr(dataset, f"{question.id}_value", response_value)
+
+    # the date of this response may be different from the dates of the other responses
+    setattr(dataset, f"{question.id}_consult_date", response_row.consultation_date)

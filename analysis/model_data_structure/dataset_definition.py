@@ -43,11 +43,8 @@ dataset.define_population(open_prompt.exists_for_patient())
 dataset.index_date = index_date
 
 # A row represents a response to a question in a questionnaire. There are six
-# questionnaires, which are administered in four surveys on day 0, 30, 60, and 90. For
-# more information, see DATA.md.
+# questionnaires. For more information, see DATA.md.
 for question in questions:
-    # fetch the row containing the last response to the current question from the survey
-    # administered on day 0
     response_row = (
         open_prompt.where(offset_from_index_date >= args.day - args.window)
         .where(offset_from_index_date <= args.day + args.window)

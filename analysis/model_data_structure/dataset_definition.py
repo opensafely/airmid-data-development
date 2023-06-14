@@ -10,8 +10,15 @@ parser.add_argument(
     type=int,
     help="The day a survey was completed, relative to the day the first survey was completed",
 )
+parser.add_argument(
+    "--window",
+    type=int,
+    default=0,
+    help="The number of days +/- the day a survey was completed",
+)
 args = parser.parse_args()
 print(f"{args.day=}")
+print(f"{args.window=}")
 
 # The number of days from the date of the earliest response to the date of the current
 # response. We expect this to be >= 0.
@@ -45,7 +52,8 @@ for question in questions:
     # fetch the row containing the last response to the current question from the survey
     # administered on day 0
     response_row = (
-        open_prompt.where(consult_offset == args.day)
+        open_prompt.where(consult_offset >= args.day - args.window)
+        .where(consult_offset <= args.day + args.window)
         .where(open_prompt.ctv3_code.is_in(question.ctv3_codes))
         # If the response is a CTV3 code, then the numeric value should be zero and
         # sorting by the numeric value should have no effect. However, if the response

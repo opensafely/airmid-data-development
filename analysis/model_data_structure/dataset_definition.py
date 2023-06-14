@@ -36,7 +36,7 @@ dataset = Dataset()
 
 dataset.define_population(open_prompt.exists_for_patient())
 
-dataset.first_consult_date = open_prompt.consultation_date.minimum_for_patient()
+dataset.first_consult_date = day_0
 
 dataset.consult_date = (
     open_prompt.where(consult_offset == args.day)

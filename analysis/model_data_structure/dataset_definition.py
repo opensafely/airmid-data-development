@@ -31,7 +31,7 @@ index_date = open_prompt.where(
 ).consultation_date.minimum_for_patient()
 # The number of days from the date of the earliest response to the date of each
 # response. We expect this to be >= 0.
-consult_offset = (open_prompt.consultation_date - index_date).days
+offset_from_index_date = (open_prompt.consultation_date - index_date).days
 
 dataset = Dataset()
 
@@ -40,7 +40,7 @@ dataset.define_population(open_prompt.exists_for_patient())
 dataset.index_date = index_date
 
 dataset.consult_date = (
-    open_prompt.where(consult_offset == args.day)
+    open_prompt.where(offset_from_index_date == args.day)
     .sort_by(open_prompt.consultation_id)
     .last_for_patient()
     .consultation_date
@@ -53,8 +53,8 @@ for question in questions:
     # fetch the row containing the last response to the current question from the survey
     # administered on day 0
     response_row = (
-        open_prompt.where(consult_offset >= args.day - args.window)
-        .where(consult_offset <= args.day + args.window)
+        open_prompt.where(offset_from_index_date >= args.day - args.window)
+        .where(offset_from_index_date <= args.day + args.window)
         .where(open_prompt.ctv3_code.is_in(question.ctv3_codes))
         # If the response is a CTV3 code, then the numeric value should be zero and
         # sorting by the numeric value should have no effect. However, if the response

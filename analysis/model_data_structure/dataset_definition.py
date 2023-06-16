@@ -45,6 +45,10 @@ dataset.index_date = index_date
 # A row represents a response to a question in a questionnaire. There are six
 # questionnaires. For more information, see DATA.md.
 for question in questions:
+    if (args.day > 0) and question.id.startswith("dm"):
+        # don't extract responses to baseline questionnaire after the index date
+        continue
+
     response_row = (
         open_prompt.where(offset_from_index_date >= args.day - args.window)
         .where(offset_from_index_date <= args.day + args.window)

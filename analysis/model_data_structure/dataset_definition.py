@@ -23,14 +23,11 @@ args = parser.parse_args()
 print(f"{args.day=}", file=sys.stderr)
 print(f"{args.window=}", file=sys.stderr)
 
+ctv3_codes = set().union(*(q.ctv3_codes for q in questions))
+
 # The date of the earliest response
 index_date = open_prompt.where(
-    # Only include responses to a compulsory question on the Eq-5D
-    # questionnaire. Unlike the baseline questionnaire, this questionnaire was
-    # administered in each survey. Surveys that are associated with these
-    # responses are valid OpenPROMPT surveys.
-    open_prompt.ctv3_code
-    == "XaYwo"
+    open_prompt.ctv3_code.is_in(ctv3_codes)
 ).consultation_date.minimum_for_patient()
 # The number of days from the date of the earliest response to the date of each
 # response. We expect this to be >= 0.

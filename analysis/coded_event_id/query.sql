@@ -1,4 +1,4 @@
--- Are values of CodedEvent_ID valid CTV3 codes?
+-- Return some basic information about values of the CodedEvent_ID column.
 SELECT
     CodedEvent_ID AS ctv3_code,
     Description AS ctv3_description,
